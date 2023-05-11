@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .active {
+            background-color: #f8f9fa !important;
+            color: rgb(175, 25, 255) !important;
+            border: 1px solid rgb(175, 25, 255) !important;
+        }
+    </style>
+    <title>KalaKumbh</title>
+</head>
+
+<body>
+    <div>
+        <header>
+            <h1 class="logo">Kalakumbh</h1>
+            <a href="index.html">
+                <button class="signup-button">Sign Out</button></a>
+        </header>
+    </div>
+    <div class="container my-4">
+        <div class="rooms mb-3 text-center">
+            <button class="btn mb-2 active" style="color: #fff" id="general">GENERAL</button>
+            <button class="btn mb-2" style="color: #fff" id="gaming">HIP HOP</button>
+            <button class="btn mb-2" style="color: #fff" id="movies">GUITARISTS</button>
+            <button class="btn mb-2" style="color: #fff" id="music">CARNATIC</button>
+            <button class="btn mb-2" style="color: #fff" id="learning">DRUMS</button>
+        </div>
+        <!--chat window-->
+        <div class="chat-window">
+            <ul class="chat-list list-group"></ul>
+        </div>
+        <!--new message chat form-->
+        <form class="new-chat my-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">New Message</div>
+                </div>
+                <input type="text" class="form-control" id="message" required autocomplete="off">
+                <div class="input-group-append">
+                    <input type="submit" class="btn bg-success send" style="color: #fff" value="send">
+                </div>
+            </div>
+        </form>
+        <!--options-->
+        <button class="options btn text-secondary bg-light border d-block mx-auto">Set Username</button>
+        <form class="new-name my-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Update Name</div>
+                </div>
+                <input type="text" class="form-control" id="name" required autocomplete="off">
+                <div class="input-group-append">
+                    <input type="submit" class="btn bg-success send" style="color: #fff" value="update">
+                </div>
+            </div>
+            <div class="update-msg text-center my-3"></div>
+        </form>
+    </div>
+
+
+    <script src="js/date-fns-v1.9.0.min.js"></script>
+
+    <!--Firebase Database-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-firestore.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCoaJxQpOvcykbUQUKqSbvCeeMQVWTEMKU",
+            authDomain: "cred-skore.firebaseapp.com",
+            databaseURL: "https://cred-skore.firebaseio.com",
+            projectId: "cred-skore",
+            storageBucket: "cred-skore.appspot.com",
+            messagingSenderId: "998861130629",
+            appId: "1:998861130629:web:8228ef467545c95acc12ec",
+            measurementId: "G-Y4RBBYL3D7"
+
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        const db = firebase.firestore(); 
+    </script>
+
+    <script src="js/data.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
