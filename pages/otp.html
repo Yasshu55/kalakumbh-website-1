@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../tailwind.css">
+</head>
+
+<body class="overflow">
+    <div>
+        <header>
+            <h1 class="logo">Kalakumbh</h1>
+            <!-- <button class="signup-button">Sign Up</button> -->
+        </header>
+        <div class="container">
+            <h2 class="text-xl m-2">Verify OTP</h2>
+            <form action="" class="m-2">
+                <input type="number" pattern="\d{6}" name="otp" id="otp" placeholder="Enter OTP"
+                    class=" font-semibold text-black p-2 rounded-xl">
+                <button id="verify-btn" class="p-2 bg-[#af19ff] font-semibold rounded-xl">Verify</button>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="../js/otp.js"></script>
+
+</html>
