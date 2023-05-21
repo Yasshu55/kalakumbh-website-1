@@ -11,11 +11,15 @@ roleBtns.forEach((roleBtn) => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ token: token, role: role }),
+      body: JSON.stringify({ role: role.toLowerCase() }),
     });
-    if (response.status != 200) {
-      window.location.href = "/pages/categories.html";
+    if (response.status === 200) {
+      const data = await response.json();
+      const token = data["token"];
+      sessionStorage.setItem("token", token);
+      window.location.href = "/pages/category.html";
     }
   });
 });
