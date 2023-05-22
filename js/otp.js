@@ -36,13 +36,20 @@ window.onload = async () => {
       window.location.href = "/pages/chat.html";
     } else if (response.status === 401) {
       alert("Wrong OTP. Please try again.");
-      window.location.href = "/pages/join.html";
+      location.reload(); // Refresh the page for resubmission
     } else if (response.status === 402) {
       alert("OTP expired. Please request a new OTP.");
       window.location.href = "/pages/join.html";
     } else {
-      alert("An error occurred. Please try again later.");
+      alert("An error occurred. Please try again.");
       window.location.href = "/pages/join.html";
     }
   });
+
+  // OTP expiration timer
+  // const otpExpirationTime = 90; // 90 seconds
+  // setTimeout(() => {
+  //   alert("OTP expired. Redirecting to join page.");
+  //   window.location.href = "/pages/join.html";
+  // }, otpExpirationTime * 1000);
 };
