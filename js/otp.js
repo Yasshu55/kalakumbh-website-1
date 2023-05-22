@@ -34,8 +34,14 @@ window.onload = async () => {
       sessionStorage.setItem("token", token);
       console.log("received token");
       window.location.href = "/pages/chat.html";
+    } else if (response.status === 401) {
+      alert("Wrong OTP. Please try again.");
+      window.location.href = "/pages/join.html";
+    } else if (response.status === 402) {
+      alert("OTP expired. Please request a new OTP.");
+      window.location.href = "/pages/join.html";
     } else {
-      alert("wrong otp");
+      alert("An error occurred. Please try again later.");
       window.location.href = "/pages/join.html";
     }
   });
