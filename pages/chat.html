@@ -18,49 +18,38 @@
         </header>
         <div class="text-start h-[90%]">
             <div id="chat-container" class="w-full h-full flex">
-                <div id="chats" class="p-1 rounded-lg bg-gradient-to-b from-black via-[#171717] to-[#af19ff] w-1/4 ">
+                <div id="chats" class=" p-1 rounded-lg bg-gradient-to-b from-black via-[#171717] to-[#af19ff] w-1/4 ">
                     <div id="chat-nav" class=" p-2 rounded-lg flex bg-[#af19ff]">
                         <p class="text-3xl font-semibold">Chats</p>
                     </div>
                     <div id="chat-list" class="bg-transparent">
-                        <div id="chat-group"
-                            class="my-2 p-2 justify-center flex flex-col border border-gray-700 rounded-lg cursor-pointer ">
-                            <p id="group-name" class="text-xl pointer-events-none">Singer</p>
-                            <p class="text-sm pointer-events-none font-thin text-gray-200 ">Hey I'm Srinvas...</p>
-                        </div>
-                        <div id="chat-group"
-                            class="my-2 p-2 justify-center flex flex-col border border-gray-700 rounded-lg cursor-pointer ">
-                            <p id="group-name" class="text-xl pointer-events-none">Singer</p>
-                            <p class="text-sm pointer-events-none font-thin text-gray-200 ">Hey I'm Srinvas...</p>
-                        </div>
-                        <div id="chat-group"
-                            class="my-2 p-2 justify-center flex flex-col border border-gray-700 rounded-lg cursor-pointer ">
-                            <p id="group-name" class="text-xl pointer-events-none">Singer</p>
-                            <p class="text-sm pointer-events-none font-thin text-gray-200 ">Hey I'm Srinvas...</p>
-                        </div>
-                        <div id="chat-group"
-                            class="my-2 p-2 justify-center flex flex-col border border-gray-700 rounded-lg cursor-pointer ">
-                            <p id="group-name" class="text-xl pointer-events-none">Singer</p>
-                            <p class="text-sm pointer-events-none font-thin text-gray-200 ">Hey I'm Srinvas...</p>
-                        </div>
-                        <div id="chat-group"
-                            class="my-2 p-2 justify-center flex flex-col border border-gray-700 rounded-lg cursor-pointer ">
-                            <p id="group-name" class="text-xl pointer-events-none">Singer</p>
-                            <p class="text-sm pointer-events-none font-thin text-gray-200 ">Hey I'm Srinvas...</p>
-                        </div>
+                        <!-- <div class="">
+                            <div id="chat-group"
+                                class="my-2 bg-gradient-to-r from-[#af19bb] via-[#af19dd] to-[#af19bb] p-4 justify-center flex flex-col border border-gray-700 rounded-lg cursor-pointer ">
+                                <p id="group-name" class="text-xl text-center font-semibold pointer-events-none">Singer
+                                </p>
+                                <p class="text-sm pointer-events-none font-thin text-gray-200 ">Hey I'm Srinvas...</p>
+                            </div>
+                        </div> -->
+
                     </div>
                 </div>
                 <div id="message-container" class=" rounded-lg w-3/4 flex flex-col bg-white ">
-                    <div id="message-box" class="m-1 p-2 border h-[92%] rounded-lg bg-white">
-                        <div class="p-2 bg-[#af19ff] border rounded-lg max-w-xl w-fit">
-                            <p class="w-fit">Lorem  ipsa Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur earum veritatis, iusto aut quaerat voluptas tempora nemo consequatur quidem porro officiis assumenda est voluptatum quis distinctio quos placeat dolore impedit! cumque natus!</p>
-                            <p>1:30PM</p>
-                        </div>
+                    <div id="message-nav" class="text-black text-2xl font-semibold p-2">Welcome to Chat</div>
+                    <div id="message-box" class="m-1 overflow-y-scroll p-2 border h-[92%] rounded-lg bg-white">
+
+                        <div class="flex h-full text-black text-xl font-bold justify-center items-center">Choose Your
+                            Group and Connect
+                            with the community😃</div>
+
                     </div>
-                    <div id="message-input"
-                        class="flex items-center justify-center m-2 h-[8%] border-2 p-3 rounded-2xl "><input type="text"
-                            name="" id="" class="w-full text-black border-none outline-none"><img
-                            src="../assets/icons/send-message.svg" alt="send icons" class="cursor-pointer w-10 h-10">
+                    <div id="input-box" class="flex items-center justify-center m-2 h-[8%] border-2 p-3 rounded-2xl ">
+                        <input type="text" name="message" id="message-input"
+                            class="w-full text-black border-none outline-none" />
+                        <div class="cursor-pointer" id="send-button">
+                            <img src="../assets/icons/send-message.svg" alt="send icons"
+                                class="pointer-events-none w-10 h-10">
+                        </div>
                     </div>
                 </div>
             </div>
