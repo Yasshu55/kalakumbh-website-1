@@ -15,19 +15,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   } else {
     window.location.href = "/pages/join.html";
   }
-  //   categoryObj = {
-  //     instrumentalist: ["tabla", "veena", "guitar", "keyboard"],
-  //     "music producer": ["executive", "technical", "artist"],
-  //     rapper: ["old school", "jazz", "rap rock", "crunk", "emo rap", "drill"],
-  //     singer: ["hindustani", "carnatic", "western", "folk"],
-  //     "sound engineer": [
-  //       "recording engineer",
-  //       "mixing engineer",
-  //       "mastering engineer",
-  //       "live sound engineer",
-  //       "multimedia engineer",
-  //     ],
-  //   };
+  // categoryObj = {
+  //   instrumentalist: ["tabla", "veena", "guitar", "keyboard"],
+  //   "music producer": ["executive", "technical", "artist"],
+  //   rapper: ["old school", "jazz", "rap rock", "crunk", "emo rap", "drill"],
+  //   singer: ["hindustani", "carnatic", "western", "folk"],
+  //   "sound engineer": [
+  //     "recording engineer",
+  //     "mixing engineer",
+  //     "mastering engineer",
+  //     "live sound engineer",
+  //     "multimedia engineer",
+  //   ],
+  // };
+
   const categorydiv = document.getElementById("categories");
   for (const category in categoryObj) {
     const dropdownele = document.createElement("div");

@@ -75,12 +75,14 @@ window.onload = function () {
           if (message["user_id"] !== uid) {
             messageBubble.classList.add("justify-start");
             messageBubble.innerHTML = `<div class="right-0 p-2 bg-[#af19ff] border rounded-lg max-w-xl w-fit">
+              <p class="text-sm text-gray-200 font-normal">${message["sender_name"]}</p>
                 <p class="w-fit">${message["message"]}</p>
                 <span class="text-xs text-gray-200 font-normal">${message["sent_time"]}</span>
             </div>`;
           } else if (message["user_id"] === uid) {
             messageBubble.classList.add("justify-end");
             messageBubble.innerHTML = `<div class="right-0 p-2 bg-gray-200 border rounded-lg max-w-xl w-fit">
+                <p class="text-sm text-[#af19ff] font-normal">${message["sender_name"]}</p>
                 <p class="w-fit text-gray-800">${message["message"]}</p>
                 <span class="text-xs text-gray-700 font-normal">${message["sent_time"]}</span>
             </div>`;
