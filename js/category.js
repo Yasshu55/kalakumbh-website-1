@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const dropdownele = document.createElement("div");
     dropdownele.id = "dropdown";
     // dropdown button
-    const dropdownbuttonele = document.createElement("dropdownbutton");
+    const dropdownbuttonele = document.createElement("div");
     dropdownbuttonele.id = "dropdownbutton";
     dropdownbuttonele.classList.add(
       "relative",
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     </svg>`;
     dropdownele.appendChild(dropdownbuttonele);
     // dropdown menu
-    const dropdownmenuele = document.createElement("dropdownmenu");
+    const dropdownmenuele = document.createElement("div");
     dropdownmenuele.id = "dropdownmenu";
     dropdownmenuele.classList.add(
       "fixed",
@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded">
                         <label for="${sc}" class="ml-2">${sc}</label>`;
       ul.appendChild(li);
+      console.log("appending");
     });
     dropdownmenuele.appendChild(ul);
     dropdownele.appendChild(dropdownmenuele);
@@ -85,8 +86,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 window.onload = function () {
+  console.log("hello");
   const btns = document.querySelectorAll("#dropdownbutton");
+  console.log(btns);
   btns.forEach((btn) => {
+    console.log("hi");
     btn.addEventListener("click", (e) => {
       const div = e.target.parentElement;
       const dropdownmenu = div.querySelector("#dropdownmenu");
