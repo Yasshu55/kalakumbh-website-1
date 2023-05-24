@@ -1,5 +1,5 @@
 window.onload = async () => {
-  const phone = sessionStorage.getItem("phone");
+  const phone = localStorage.getItem("phone");
 
   const button = document.getElementById("verify-btn");
   const input = document.getElementById("otp");
@@ -24,14 +24,12 @@ window.onload = async () => {
       // }
       // const auth_header = response.headers.get("Authorization");
       const token = data["token"];
-      sessionStorage.setItem("token", token);
+      localStorage.setItem("token", token);
       console.log("received token");
       window.location.href = "/pages/signup.html";
     } else if (response.status === 200) {
-      console.log(`redirecting to chat page and the response is: ${response}`);
-      const auth_header = response.headers.get("Authorization");
-      const token = auth_header.split(" ")[1];
-      sessionStorage.setItem("token", token);
+      const token = data["token"];
+      localStorage.setItem("token", token);
       console.log("received token");
       window.location.href = "/pages/chat.html";
     } else if (response.status === 401) {

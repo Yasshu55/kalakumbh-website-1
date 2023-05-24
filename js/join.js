@@ -3,7 +3,7 @@ const input = document.getElementById("phone");
 button.addEventListener("click", async (e) => {
   e.preventDefault();
   //   console.log(input.value);
-  sessionStorage.setItem("phone", input.value);
+  localStorage.setItem("phone", input.value);
   const response = await fetch(`http://localhost/api/v1/login/${input.value}`, {
     method: "GET",
     mode: "cors",
