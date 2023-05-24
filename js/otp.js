@@ -1,5 +1,5 @@
 window.onload = async () => {
-  const phone = sessionStorage.getItem("phone");
+  const phone = localStorage.getItem("phone");
 
   const button = document.getElementById("verify-btn");
   const input = document.getElementById("otp");
@@ -24,19 +24,30 @@ window.onload = async () => {
       // }
       // const auth_header = response.headers.get("Authorization");
       const token = data["token"];
-      sessionStorage.setItem("token", token);
+      localStorage.setItem("token", token);
       console.log("received token");
       window.location.href = "/pages/signup.html";
     } else if (response.status === 200) {
-      console.log(`redirecting to chat page and the response is: ${response}`);
-      const auth_header = response.headers.get("Authorization");
-      const token = auth_header.split(" ")[1];
-      sessionStorage.setItem("token", token);
+      const token = data["token"];
+      localStorage.setItem("token", token);
       console.log("received token");
       window.location.href = "/pages/chat.html";
+    } else if (response.status === 401) {
+      alert("Wrong OTP. Please try again.");
+      location.reload(); // Refresh the page for resubmission
+    } else if (response.status === 402) {
+      alert("OTP expired. Please request a new OTP.");
+      window.location.href = "/pages/join.html";
     } else {
-      alert("wrong otp");
+      alert("An error occurred. Please try again.");
       window.location.href = "/pages/join.html";
     }
   });
+
+  // OTP expiration timer
+  // const otpExpirationTime = 90; // 90 seconds
+  // setTimeout(() => {
+  //   alert("OTP expired. Redirecting to join page.");
+  //   window.location.href = "/pages/join.html";
+  // }, otpExpirationTime * 1000);
 };

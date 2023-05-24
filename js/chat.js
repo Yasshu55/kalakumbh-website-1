@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const token = sessionStorage.getItem("token");
+  const token = localStorage.getItem("token");
   if (token) {
     const response = await fetch("http://localhost/api/v1/prefill", {
       method: "GET",
@@ -11,18 +11,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     const data = await response.json();
     if (response.status === 200) {
-      sessionStorage.setItem("userData", JSON.stringify(data));
+      localStorage.setItem("userData", JSON.stringify(data));
       //   const name = data["firstName"];
       //   const uid = data["_id"];
-      const role = data["role"];
+      const role = data["user_data"]["role"];
+      if (!role) {
+        window.location.href = "/";
+      }
+      // console.log(role);
       groupNames = ["global"];
       if (role === "organizer") {
         groupNames.push("organizer");
       } else {
+        if (!data["user_data"]["categories"]) {
+          window.location.href = "/";
+        }
         const cats = [...Object.keys(data["user_data"]["categories"])];
         groupNames = groupNames.concat(cats);
       }
-      console.log(groupNames);
+      // console.log(groupNames);
       const chatList = document.getElementById("chat-list");
       groupNames.forEach((groupName) => {
         const group = document.createElement("div");
@@ -33,14 +40,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         chatList.appendChild(group);
       });
     }
+  } else {
+    window.location.href = "/pages/join.html";
   }
 });
 
 window.onload = function () {
-  const session_data = JSON.parse(sessionStorage.getItem("userData"));
-  console.log(session_data);
-  const uid = session_data["user_data"]["_id"];
-  console.log(uid);
+  const local_data = JSON.parse(localStorage.getItem("userData"));
+  // console.log(local_data);
+  const uid = local_data["user_data"]["_id"];
+  const name =
+    local_data["user_data"]["firstName"] +
+    " " +
+    local_data["user_data"]["lastName"];
+  // console.log(uid);
   //   Filling the Chat Box
   const chatList = document.querySelectorAll("#chat-group");
   chatList.forEach((chatGroup) => {
@@ -56,14 +69,14 @@ window.onload = function () {
           mode: "cors",
           headers: {
             contentType: "application/json",
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
 
       if (response.status === 200) {
         const responsedata = await response.json();
-        console.log(responsedata);
+        // console.log(responsedata);
         const groupMessages = responsedata["messages"];
         const messageBox = document.getElementById("message-box");
         messageBox.innerHTML = "";
@@ -71,23 +84,26 @@ window.onload = function () {
           const messageBubble = document.createElement("div");
           messageBubble.id = "message";
           messageBubble.classList.add("flex", "my-2");
-          console.log(message["message"]);
+          // console.log(message["message"]);
+          const sentTime = new Date(message["sent_time"]).toLocaleTimeString();
           if (message["user_id"] !== uid) {
             messageBubble.classList.add("justify-start");
             messageBubble.innerHTML = `<div class="right-0 p-2 bg-[#af19ff] border rounded-lg max-w-xl w-fit">
+              <p class="text-sm text-gray-200 font-normal">${message["sender_name"]}</p>
                 <p class="w-fit">${message["message"]}</p>
-                <span class="text-xs text-gray-200 font-normal">${message["sent_time"]}</span>
+                <span class="text-xs text-gray-200 font-normal">${sentTime}</span>
             </div>`;
           } else if (message["user_id"] === uid) {
             messageBubble.classList.add("justify-end");
             messageBubble.innerHTML = `<div class="right-0 p-2 bg-gray-200 border rounded-lg max-w-xl w-fit">
+                <p class="text-sm text-[#af19ff] font-normal">${message["sender_name"]}</p>
                 <p class="w-fit text-gray-800">${message["message"]}</p>
-                <span class="text-xs text-gray-700 font-normal">${message["sent_time"]}</span>
+                <span class="text-xs text-gray-700 font-normal">${sentTime}</span>                
             </div>`;
           }
           messageBox.appendChild(messageBubble);
         });
-        console.log("yay messages received");
+        // console.log("yay messages received"); 
       }
     });
   });
@@ -98,9 +114,9 @@ window.onload = function () {
     const messageNav = document.getElementById("message-nav");
     const groupName = messageNav.innerText;
     const messageInput = document.getElementById("message-input");
-    console.log(messageInput.value);
+    // console.log(messageInput.value);
     const user_message = messageInput.value.trim();
-    console.log(typeof user_message);
+    // console.log(typeof user_message);
     if (groupName !== "Welcome to Chat" && user_message !== "") {
       const messageBox = document.getElementById("message-box");
       const sent_time = new Date().toISOString();
@@ -109,7 +125,7 @@ window.onload = function () {
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           group_name: groupName,
@@ -118,21 +134,35 @@ window.onload = function () {
           sent_time: sent_time,
         }),
       });
+
       if (response.status === 200) {
+        const sentTime = new Date(sent_time).toLocaleTimeString();
         const responsedata = await response.json();
-        console.log(responsedata);
+        // console.log(responsedata);
         const messageBubble = document.createElement("div");
         messageBubble.id = "message";
         messageBubble.classList.add("flex", "my-2", "justify-end");
         messageBubble.innerHTML = `<div class="right-0 p-2 bg-gray-200 border rounded-lg max-w-xl w-fit">
+        <p class="text-sm text-[#af19ff] font-normal">${name}</p>
                 <p class="w-fit text-gray-800">${messageInput.value}</p>
-                <span class="text-xs text-gray-700 font-normal">${sent_time}</span>
+                <span class="text-xs text-gray-700 font-normal">${sentTime}</span>
             </div>`;
         messageBox.appendChild(messageBubble);
         messageInput.value = "";
       }
     } else {
-      console.log("no groups");
+      // console.log("no groups");
     }
   });
 };
+
+function preback() {
+  window.history.forward();
+}
+setTimeout("preback()", 0);
+
+const signoutBtn = document.getElementById("signout-button");
+signoutBtn.addEventListener("click", () => {
+  localStorage.removeItem("token");
+  window.location.href = "/pages/join.html";
+});
