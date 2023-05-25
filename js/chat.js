@@ -121,6 +121,7 @@ window.onload = function () {
       }
     });
     
+
     const user_message = messageInput.value.trim();
     // console.log(typeof user_message);
     if (groupName !== "Welcome to Chat" && user_message !== "") {
@@ -172,3 +173,4 @@ signoutBtn.addEventListener("click", () => {
   localStorage.removeItem("token");
   window.location.href = "/pages/join.html";
 });
+

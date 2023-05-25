@@ -31,6 +31,7 @@ btn.addEventListener("click", async (e) => {
       return;
     }
 
+
     const profile = {
       firstName: fname,
       lastName: lname,
@@ -38,7 +39,6 @@ btn.addEventListener("click", async (e) => {
       phone: phone,
     };
 
-    // send token in the authorization headers
     const response = await fetch("http://localhost/api/v1/profile", {
       method: "POST",
       mode: "cors",

@@ -1,4 +1,4 @@
-const token = sessionStorage.getItem("token");
+const token = localStorage.getItem("token");
 const roleBtns = document.querySelectorAll("#role-btn");
 
 roleBtns.forEach((roleBtn) => {
@@ -18,7 +18,10 @@ roleBtns.forEach((roleBtn) => {
     if (response.status === 200) {
       const data = await response.json();
       const token = data["token"];
-      sessionStorage.setItem("token", token);
+      localStorage.setItem("token", token);
+      if (role === "organizer") {
+        window.location.href = "pages/chat.html";
+      }
       window.location.href = "/pages/category.html";
     }
   });
