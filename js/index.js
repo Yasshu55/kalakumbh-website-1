@@ -15,7 +15,7 @@ async function check() {
     } else if (prefill_data["user_data"]["role"]) {
       window.location.href = "/pages/category.html";
     } else if (prefill_data["user_data"]["email"]) {
-      window.location.href = "/pages/role.html";
+      window.location.href = "/pages/roles.html";
     } else if (prefill_data["user_data"]["phone"]) {
       window.location.href = "/pages/signup.html";
     }

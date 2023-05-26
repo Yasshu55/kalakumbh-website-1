@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");
+  const categories = localStorage.getItem("categories");
+  
   if (token) {
     const response = await fetch("http://localhost/api/v1/prefill", {
       method: "GET",

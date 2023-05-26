@@ -1,7 +1,21 @@
 let categoryObj = {};
+
 document.addEventListener("DOMContentLoaded", async () => {
+  console.log("DOM loaded");
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+  const phone = localStorage.getItem("phone");
+  const email = localStorage.getItem("email");
+  if(!role && token && phone && email){
+    window.location.href = "/pages/roles.html";
+  } else if(!email && phone && token){
+    window.location.href = "/pages/signup.html";
+  }
+  const categories = localStorage.getItem("categories"); 
   console.log(token);
+  if(categories){
+    window.location.href = "/pages/chat.html";
+  }
 
   if (token) {
     const prefillResponse = await fetch("http://localhost/api/v1/prefill", {
