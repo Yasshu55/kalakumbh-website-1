@@ -116,7 +116,14 @@ window.onload = function () {
     const messageNav = document.getElementById("message-nav");
     const groupName = messageNav.innerText;
     const messageInput = document.getElementById("message-input");
-    // console.log(messageInput.value);
+    messageInput.addEventListener("keypress", async (e) => {
+      if (e.key === "Enter") { // Check if the pressed key = Enter key
+        e.preventDefault();
+        sendButton.click(); // Trigger the click event for the send button
+      }
+    });
+    
+
     const user_message = messageInput.value.trim();
     // console.log(typeof user_message);
     if (groupName !== "Welcome to Chat" && user_message !== "") {
@@ -168,3 +175,4 @@ signoutBtn.addEventListener("click", () => {
   localStorage.removeItem("token");
   window.location.href = "/pages/join.html";
 });
+

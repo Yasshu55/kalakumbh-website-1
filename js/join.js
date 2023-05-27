@@ -24,6 +24,14 @@ else if( !email && token && phoneNo){
    window.location.href = "/pages/signup.html";
 }
 
+input.addEventListener("keypress", async (e) => {
+  if (e.key === "Enter") { // Check if the pressed key is the enter key
+    e.preventDefault();
+    button.click(); // Trigger the click event for the button
+  }
+});
+
+
 button.addEventListener("click", async (e) => {
   e.preventDefault();
   //   console.log(input.value);
