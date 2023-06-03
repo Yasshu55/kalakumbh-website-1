@@ -7,7 +7,7 @@ window.onload = async () => {
 
   async function check() {
     if (token) {
-      const prefill_response = await fetch("http://localhost/api/v1/prefill", {
+      const prefill_response = await fetch("https://kalakumbh-server.kalakumbh.org/api/v1/prefill", {
         method: "GET",
         mode: "cors",
         headers: {
@@ -37,7 +37,7 @@ window.onload = async () => {
     e.preventDefault();
     console.log(input.value);
     console.log(phone);
-    const response = await fetch(`http://localhost/api/v1/login/${phone}`, {
+    const response = await fetch(`https://kalakumbh-server.kalakumbh.org/api/v1/login/${phone}`, {
       method: "POST",
       mode: "cors",
       headers: {

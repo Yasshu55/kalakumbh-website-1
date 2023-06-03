@@ -6,7 +6,7 @@ console.log(location.href);
 if(token){
   async function check() {
     if (token) {
-      const prefill_response = await fetch("http://localhost/api/v1/prefill", {
+      const prefill_response = await fetch("https://kalakumbh-server.kalakumbh.org/api/v1/prefill", {
         method: "GET",
         mode: "cors",
         headers: {
@@ -71,7 +71,7 @@ if(token){
     
       
       // send token in the authorisation headers
-      const response = await fetch("http://localhost/api/v1/profile", {
+      const response = await fetch("https://kalakumbh-server.kalakumbh.org/api/v1/profile", {
         method: "POST",
         mode: "cors",
         headers: {
