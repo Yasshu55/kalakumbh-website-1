@@ -1,54 +1,43 @@
 window.onload = async () => {
-  console.log(location.href);
-  // history.pushState(null, null, location.href);
-  
-  // window.addEventListener('popstate', function(event) {
-  //   console.log("back button pressed");
-  //   // Push the state again to stay on the same page
-  //   history.pushState({
-  //     state: location.href,
-  //     title: document.title,
-  //     url: location.href,
-  //   }, null, location.href);
-  //   event.preventDefault();
-  // });
-  const token = localStorage.getItem("token");
-  const phoneNo = localStorage.getItem("phone");
-  const email = localStorage.getItem("email");
-  const role = localStorage.getItem("role");
-  const categories = localStorage.getItem("categories");
-  
-  
-  if(categories && role && token && phoneNo && email ){
-    console.log("redirecting to chat page");
-    window.location.href = "/pages/chat.html";
-  }
-  else if(!categories && role && token && phoneNo && email ){
-    console.log("redirecting to category page");
-    window.location.href = "/pages/category.html";
-  }
-  else if(!role&& token && phoneNo && email){
-    console.log("redirecting to roles page");
-     window.location.href = "/pages/roles.html";
-  }
-  else if( !email && token && phoneNo){
-    console.log("redirecting to signup page");
-     window.location.href = "/pages/signup.html";
-  }
-  
+
+  const token = localStorage.getItem("token");  
   const phone = localStorage.getItem("phone");
   const button = document.getElementById("verify-btn");
   const input = document.getElementById("otp");
+
+  async function check() {
+    if (token) {
+      const prefill_response = await fetch("https://kalakumbh-server.kalakumbh.org/api/v1/prefill", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      const prefill_data = await prefill_response.json();
+      if (prefill_data["user_data"]["groups"]) {
+        window.location.href = "/pages/chat.html";
+      } else if (prefill_data["user_data"]["role"]) {
+        window.location.href = "/pages/category.html";
+      } else if (prefill_data["user_data"]["email"]) {
+        window.location.href = "/pages/roles.html";
+      } else if (prefill_data["user_data"]["phone"]) {
+        window.location.href = "/pages/signup.html";
+      }
+    }
+  }
+  check()
+  
+
+
   button.addEventListener("click", async (e) => {
     console.log("button clicked");
     e.preventDefault();
     console.log(input.value);
     console.log(phone);
-    if(phone === null){
-      alert("Please enter a phone number");
-      window.location.href = "/pages/join.html";
-    }
-    const response = await fetch(`http://localhost/api/v1/login/${phone}`, {
+    const response = await fetch(`https://kalakumbh-server.kalakumbh.org/api/v1/login/${phone}`, {
       method: "POST",
       mode: "cors",
       headers: {

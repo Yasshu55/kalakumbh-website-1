@@ -8,7 +8,7 @@ btns.forEach((btn) => {
   dropbtn.addEventListener("click", (e) => {
     const div = e.target.parentElement;
     const dropdownmenu = div.querySelector("#dropdownmenu");
-    console.log("this is dropdown menu: "+dropdownmenu);
+    console.log("this is dropdown menu: " + dropdownmenu);
     handleMenus(dropdownmenu);
     if (dropdownmenu.classList.contains("hidden")) {
       dropdownmenu.classList.remove("hidden");
@@ -22,7 +22,7 @@ const submitbtn = document.getElementById("submitbtn");
 submitbtn.addEventListener("click", async () => {
   const categorydiv = document.getElementById("categories");
   const clist = categorydiv.querySelectorAll("#dropdown");
-  localStorage.setItem("categories", JSON.stringify(clist));
+
   let categoryObj = {};
   clist.forEach((c) => {
     const category = c.querySelector("#dropdownbutton>span").innerText;
@@ -46,17 +46,20 @@ submitbtn.addEventListener("click", async () => {
   }
   const token = localStorage.getItem("token");
   console.log(body);
-  const response = await fetch("http://localhost/api/v1/profile/categories", {
-    method: "POST",
-    mode: "cors",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(body),
-  });
+  const response = await fetch(
+    "https://kalakumbh-server.kalakumbh.org/api/v1/profile/categories",
+    {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    }
+  );
   const data = await response.json();
-  console.log("category-afterload data: ------ "+data);
+  console.log("category-afterload data: ------ " + data);
   if (response.status === 200) {
     window.location.href = "/pages/chat.html";
   }

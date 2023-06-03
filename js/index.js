@@ -1,14 +1,17 @@
-async function check() {
+document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");
   if (token) {
-    const prefill_response = await fetch("http://localhost/api/v1/prefill", {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const prefill_response = await fetch(
+      "https://kalakumbh-server.kalakumbh.org/api/v1/prefill",
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     const prefill_data = await prefill_response.json();
     if (prefill_data["user_data"]["groups"]) {
       window.location.href = "/pages/chat.html";
@@ -20,5 +23,4 @@ async function check() {
       window.location.href = "/pages/signup.html";
     }
   }
-}
-check()
+});
