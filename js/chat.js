@@ -65,6 +65,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 const signoutBtn = document.getElementById("signout-button");
 signoutBtn.addEventListener("click", () => {
-  localStorage.removeItem("token");
+  localStorage.clear();
   window.location.href = "/pages/join.html";
 });

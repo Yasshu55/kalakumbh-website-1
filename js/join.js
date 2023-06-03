@@ -1,8 +1,35 @@
+document.addEventListener("DOMContentLoaded", async () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    const prefill_response = await fetch(
+      "https://kalakumbh-server.kalakumbh.org/api/v1/prefill",
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (prefill_response.status === 200) {
+      const prefill_data = await prefill_response.json();
+      if (prefill_data["user_data"]["groups"]) {
+        window.location.href = "/pages/chat.html";
+      } else if (prefill_data["user_data"]["role"]) {
+        window.location.href = "/pages/category.html";
+      } else if (prefill_data["user_data"]["email"]) {
+        window.location.href = "/pages/roles.html";
+      } else if (prefill_data["user_data"]["phone"]) {
+        window.location.href = "/pages/signup.html";
+      }
+      // const phoneNo = localStorage.getItem("phone");
+    }
+  }
+});
+
 const button = document.getElementById("get-btn");
 const input = document.getElementById("phone");
-const token = localStorage.getItem("token");
-const phoneNo = localStorage.getItem("phone");
-
 input.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
     // Check if the pressed key is the enter key
@@ -13,7 +40,7 @@ input.addEventListener("keypress", async (e) => {
 
 button.addEventListener("click", async (e) => {
   e.preventDefault();
-  //   console.log(input.value);
+  console.log(input.value);
   localStorage.setItem("phone", input.value);
   const response = await fetch(
     `https://kalakumbh-server.kalakumbh.org/api/v1/login/${input.value}`,

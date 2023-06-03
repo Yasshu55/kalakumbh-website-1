@@ -56,6 +56,9 @@ chatList.forEach((chatGroup) => {
         messageBox.appendChild(messageBubble);
       });
       // console.log("yay messages received");
+    } else {
+      alert("Session logged out");
+      window.location.reload();
     }
   });
 });

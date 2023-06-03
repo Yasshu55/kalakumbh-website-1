@@ -1,4 +1,4 @@
-async function check() {
+document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");
   if (token) {
     const prefill_response = await fetch(
@@ -23,5 +23,4 @@ async function check() {
       window.location.href = "/pages/signup.html";
     }
   }
-}
-check();
+});
