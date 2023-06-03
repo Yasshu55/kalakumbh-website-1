@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   console.log("DOM loaded");
   const token = localStorage.getItem("token");
 
+
   if (token) {
     const prefillResponse = await fetch(
       "https://kalakumbh-server.kalakumbh.org/api/v1/prefill",
