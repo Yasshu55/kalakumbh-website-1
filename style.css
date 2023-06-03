@@ -104,6 +104,10 @@ header {
     color: white;
     margin: 0;
   }
+
+  .logo-name{
+    text-decoration: none;
+  }
   
   .signup-button {
     background-color: rgb(175, 25, 255);
