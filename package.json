@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "vite"
+    "start": "vite",
+    "build" : "vite build"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
