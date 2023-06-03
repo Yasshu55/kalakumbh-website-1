@@ -2,41 +2,31 @@ const phone = localStorage.getItem("phone");
 const token = localStorage.getItem("token");
 // const url_data = new URL(window.location);  // Get the URL data
 console.log(location.href);
-// history.pushState(null, null, location.href);
-
-
-// window.addEventListener('popstate', function(event) {
-//   console.log("back button pressed");
-//   // Push the state again to stay on the same page
-//   history.pushState({
-//     state: location.href,
-//     title: document.title,
-//     url: location.href,
-//   }, null, location.href);
-//   event.preventDefault();
-// });
-
-// const token = localStorage.getItem("token");
-const phoneNo = localStorage.getItem("phone");
-const email = localStorage.getItem("email");
-const role = localStorage.getItem("role");
-const categories = localStorage.getItem("categories");
-
-
-if(categories && role && token && phoneNo && email ){
-  console.log("redirecting to chat page");
-  window.location.href = "/pages/chat.html";
-}
-else if(!categories && role && token && phoneNo && email ){
-  console.log("redirecting to category page");
-  window.location.href = "/pages/category.html";
-}
-else if(!role&& token && phoneNo && email){
-  console.log("redirecting to roles page");
-   window.location.href = "/pages/roles.html";
-}
 
 if(token){
+  async function check() {
+    if (token) {
+      const prefill_response = await fetch("http://localhost/api/v1/prefill", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      const prefill_data = await prefill_response.json();
+      if (prefill_data["user_data"]["groups"]) {
+        window.location.href = "/pages/chat.html";
+      } else if (prefill_data["user_data"]["role"]) {
+        window.location.href = "/pages/category.html";
+      } else if (prefill_data["user_data"]["email"]) {
+        window.location.href = "/pages/roles.html";
+      }
+    }
+  }
+  check()
+
   const btn = document.getElementById("button");
   const fnameInput = document.getElementById("fname");
   const lnameInput = document.getElementById("lname");
@@ -60,22 +50,18 @@ if(token){
     }
   }
   btn.addEventListener("click", async (e) => {
-    
-      if (confirm("Are the details entered correct?")) {
+    const isConfirmed = confirm("Are you sure you want to submit?");
+      if (isConfirmed) {
       const fname = document.getElementById("fname").value;
       const lname = document.getElementById("lname").value;
       const email = document.getElementById("email").value;
-      }
-    else{
-      location.reload();
-    }
+
       
       if(fname === "" || lname === "" || email === ""){
         alert("Please enter all the details");
         return;
       }
     
-      localStorage.setItem("email", email);
       const profile = {
         firstName: fname,
         lastName: lname,
@@ -103,6 +89,10 @@ if(token){
       window.location.href = "/pages/join.html";
     }
   }
+else{
+  location.reload();
+  }
+ }
 )
 } else {
   window.location.href = "/pages/join.html";

@@ -22,7 +22,7 @@ const submitbtn = document.getElementById("submitbtn");
 submitbtn.addEventListener("click", async () => {
   const categorydiv = document.getElementById("categories");
   const clist = categorydiv.querySelectorAll("#dropdown");
-  localStorage.setItem("categories", JSON.stringify(clist));
+
   let categoryObj = {};
   clist.forEach((c) => {
     const category = c.querySelector("#dropdownbutton>span").innerText;
